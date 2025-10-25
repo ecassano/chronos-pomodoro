@@ -1,6 +1,7 @@
 import type { TaskStateModel } from '../../models/TaskStateModel'
 import { type TaskActionModel, TaskActionTypes } from './taskActions'
 import { getNextCycle } from '../../utils/getNextCycle'
+import { initialTaskState } from './initialTaskState'
 import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes'
 
 export function taskReducer(
@@ -60,7 +61,10 @@ export function taskReducer(
       }
     }
     case TaskActionTypes.RESET_STATE: {
-      return state
+      return { ...initialTaskState }
+    }
+    case TaskActionTypes.CHANGE_SETTINGS: {
+      return { ...state, config: action.payload }
     }
   }
 
